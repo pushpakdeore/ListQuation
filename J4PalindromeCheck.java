@@ -1,44 +1,93 @@
 package pushpak30listquation;
+import java.util.Collection;
+import java.util.LinkedList;
 import java.util.*;
-/*4. Palindrome Check: Determine if a LinkedList is a palindrome. java*/
+
 public class J4PalindromeCheck {
+
+
     public static boolean isPalindrome(LinkedList<Integer> list) {
 
-        StringBuilder original = new StringBuilder();
-        StringBuilder reversed = new StringBuilder();
+        LinkedList<Integer> copyList = new LinkedList<>(list);
 
+        while (copyList.size() > 1) {
+            int first = copyList.getFirst();
+            int last = copyList.getLast();
 
-        ListIterator<Integer> iterator = list.listIterator();
-        while (iterator.hasNext()) {
-            original.append(iterator.next());
+            if (first != last) {
+                return false;
+            }
+            copyList.removeFirst();
+            copyList.removeLast();
         }
 
 
-        ListIterator<Integer> reverseIterator = list.listIterator(list.size());
-        while (reverseIterator.hasPrevious()) {
-            reversed.append(reverseIterator.previous());
-        }
+        return true;
+    }
+    private static boolean isPalindromea(LinkedList<Integer> list) {
+        int left = 0;
+        int right = list.size() - 1;
 
-        return original.toString().equals(reversed.toString());
+        while (left < right) {
+            if (list.get(left).equals(list.get(right))) {
+                return true;
+            }
+            left++;
+            right--;
+        }
+        return false; // All matches
     }
 
+    public static boolean isPalindromeaa(LinkedList<Integer> list){
+        LinkedList<Integer> copy = new LinkedList<Integer> (list);
+        Collections.reverse(copy);
+        if(copy.equals(list)){
+            return true;
+        }
+        return false;
+
+    }
+
+
     public static void main(String[] args) {
-        // Create a LinkedList
+
         LinkedList<Integer> list = new LinkedList<>();
 
-        // Add elements to the LinkedList
         list.add(1);
         list.add(2);
         list.add(3);
         list.add(2);
         list.add(1);
 
-        // Check if the LinkedList is palindrome
+
+        System.out.println("Original LinkedList: " + list);
+        //1
         if (isPalindrome(list)) {
             System.out.println("The LinkedList is a palindrome.");
         } else {
             System.out.println("The LinkedList is not a palindrome.");
         }
-    }
 
+        System.out.println("Original LinkedList after check: " + list);
+
+        System.out.println("Original LinkedList: " + list);
+
+
+        //2
+
+        if (isPalindromea(list)) {
+            System.out.println("The LinkedList is a palindrome.");
+        } else {
+            System.out.println("The LinkedList is not a palindrome.");
+        }
+        System.out.println("Original LinkedList after check: " + list);
+
+
+        //3
+        if (isPalindromeaa(list)) {
+            System.out.println("The LinkedList is a palindrome.");
+        }
+    }
 }
+
+
